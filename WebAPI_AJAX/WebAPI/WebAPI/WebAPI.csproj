@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -125,10 +132,25 @@
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="DBClasses\DispecerRepository.cs" />
+    <Compile Include="DBClasses\MusterijaRepository.cs" />
+    <Compile Include="DBClasses\SystemDBContext.cs" />
+    <Compile Include="DBClasses\VozacRepository.cs" />
+    <Compile Include="Models\Automobil.cs" />
+    <Compile Include="Models\Dispecer.cs" />
+    <Compile Include="Models\Komentar.cs" />
+    <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\Lokacija.cs" />
+    <Compile Include="Models\Musterija.cs" />
+    <Compile Include="Models\Pol.cs" />
+    <Compile Include="Models\StatusVoznje.cs" />
+    <Compile Include="Models\TipAuta.cs" />
+    <Compile Include="Models\Vozac.cs" />
+    <Compile Include="Models\Voznja.cs" />
+    <Compile Include="Properties\App_Start\BundleConfig.cs" />
+    <Compile Include="Properties\App_Start\FilterConfig.cs" />
+    <Compile Include="Properties\App_Start\RouteConfig.cs" />
+    <Compile Include="Properties\App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -172,8 +194,12 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\reg_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="HTML\Login.html" />
+    <Content Include="HTML\Registration.html" />
+    <Content Include="HTML\validate.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
