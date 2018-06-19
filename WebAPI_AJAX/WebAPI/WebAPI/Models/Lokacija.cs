@@ -2,16 +2,17 @@
 {
     public class Lokacija
     {
-        public string adresa { get; set; }
+        public Adresa adresa { get; set; }
 
-        public int x { get; set; }
-        public int y { get; set; }
+        public double x { get; set; }
+        public double y { get; set; }
 
-        public Lokacija(string adresa, int x, int y)
+        public Lokacija(Adresa adresa, double x, double y)
         {
             this.adresa = adresa;
             this.x = x;
             this.y = y;
         }
+        public Lokacija() { }
     }
 }

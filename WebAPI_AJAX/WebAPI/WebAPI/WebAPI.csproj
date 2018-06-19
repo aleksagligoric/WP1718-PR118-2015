@@ -130,22 +130,30 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Prijava\" />
+    <Folder Include="Views\Registration\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBClasses\DispecerRepository.cs" />
-    <Compile Include="DBClasses\MusterijaRepository.cs" />
-    <Compile Include="DBClasses\SystemDBContext.cs" />
-    <Compile Include="DBClasses\VozacRepository.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PrijavaController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Automobil.cs" />
     <Compile Include="Models\Dispecer.cs" />
+    <Compile Include="Models\Dispeceri.cs" />
     <Compile Include="Models\Komentar.cs" />
+    <Compile Include="Models\Korisnici.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Lokacija.cs" />
     <Compile Include="Models\Musterija.cs" />
     <Compile Include="Models\Pol.cs" />
     <Compile Include="Models\StatusVoznje.cs" />
     <Compile Include="Models\TipAuta.cs" />
+    <Compile Include="Models\Uloga.cs" />
     <Compile Include="Models\Vozac.cs" />
+    <Compile Include="Models\Vozaci.cs" />
     <Compile Include="Models\Voznja.cs" />
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
@@ -179,10 +187,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,14 +196,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Baza\dispeceri.txt" />
+    <Content Include="Baza\korisnici.txt" />
+    <Content Include="Baza\vozaci.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\reg_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="HTML\Login.html" />
-    <Content Include="HTML\Registration.html" />
-    <Content Include="HTML\validate.js" />
+    <Content Include="HTML\index.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

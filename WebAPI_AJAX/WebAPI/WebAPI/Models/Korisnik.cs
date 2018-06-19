@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace WebAPI.Models
 {
     public class Korisnik
     {
+        
         public   string Kime { get; set; }
         public string lozinka { get; set; }
         public string ime { get; set; }
@@ -19,13 +21,17 @@ namespace WebAPI.Models
 
         public string email { get; set; }
 
-        public string uloga { get; set; }
+        public Uloga uloga { get; set; }
 
+        public Pol pol { get; set; }
         public List<Voznja> voznje = new List<Voznja>();
 
-        public Korisnik(){ }
+        public Korisnik()
+        {
+          
+        }
 
-        public Korisnik(string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email, string uloga, List<Voznja> voznje)
+        public Korisnik(string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email,string pol)
         {
             Kime = kime;
             this.lozinka = lozinka;
@@ -34,8 +40,15 @@ namespace WebAPI.Models
             JMBG = jMBG;
             this.telefon = telefon;
             this.email = email;
-            this.uloga = uloga;
-            this.voznje = voznje;
+ 
+            if (pol == "muski")
+            {
+                this.pol = Pol.Muski;
+            }
+            else
+            {
+                this.pol = Pol.Zenski;
+            }
         }
     }
 }

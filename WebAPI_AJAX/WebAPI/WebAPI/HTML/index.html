@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <!--  <script src="../../Scripts/registration.js"></script>-->
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../Content/reg_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <script src="../../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>CIGIN TAXI</title>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#registracijaFrame").css('display', 'none');
+
+            $("p").click(function () {
+                alert($(this).text());
+            });
+
+           $("#load-products").click(function () {
+                $.get("/api/registracija", function (data, status) {
+                    let tableOfProducts = "<table border='1'>";
+                    for (korisnik in data) {
+                        tableOfProducts += `<tr><td>${data[korisnik].KorisnickoIme}</td><td>${data[korisnik].Lozinka}</td></tr>`;
+                    }
+                    tableOfProducts += "</table>";
+                    $("#content").html(tableOfProducts);
+                });
+            });
+
+            $("#prijava").click(function () {
+                let ki = $('#korIme').val();
+                let p = $('#korPass').val();
+
+                if (ki == "" || p == "") {
+                    alert("Popunite sva polja");
+                }
+                else {
+                    let korisnik = {
+                        Kime: `${$('#korIme').val()}`,
+                        lozinka: `${$('#korPass').val()}`,
+                    };
+
+                    $.ajax({
+
+                        type: 'POST',
+                        url: '/api/Prijava',
+                        data: JSON.stringify(korisnik),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data != "Uspesno") {
+                                $("#greskaPrijava").html("<p>" + data + "</p>");
+                            }
+                            else {
+                                localStorage.setItem("korisnik", korisnik.Kime);
+                                $("#greskaPrijava").html("<p>" + " " + "</p>");
+                                alert("Prijavljeno");
+                                $(location).attr('href', 'single.html');
+                            }
+
+
+                        }
+                    })
+                }
+            });
+
+            $("#prikazi").click(function () {
+
+                $("#prijavaFrame").hide(1000);
+                $("#registracijaFrame").show(1000);
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header"></div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right"></ul>
+            </div>
+            <h3>CIGIN TAXI</h3>
+        </div>
+    </nav>
+
+    <div id="prijavaFrame" style="width:800px; margin:0 auto;">
+        <h2>PRIJAVA</h2>
+        <table>
+            <tr>
+                <td>Ime: </td>
+                <td><input id="korIme" type="text" name="KorisnickoIme" /></td>
+            </tr>
+            <tr>
+                <td>Lozinka: </td>
+                <td><input id="korPass" type="password" name="Lozinka" /></td>
+            </tr>
+            <tr><td><br /> </td><td></td></tr>
+            <tr>
+                <td></td>
+                <td>  <button id="prikazi" type="button">Napravi nalog</button>  <button id="prijava" type="button">Prijavi se</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="greskaPrijava"></div>
+    <div id="registracijaFrame" style="width:800px; margin:0 auto;">
+        <h2> Registracija :)</h2>
+        <table>
+            <tr>
+                <td>Korisnicko ime: </td>
+                <td>
+                    <input id="korImeReg" type="text" name="KorisnickoIme" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>Lozinka: </td>
+                <td><input id="korPassReg" type="password" name="Lozinka" /></td>
+            </tr>
+            <tr>
+                <td>Ime: </td>
+                <td><input id="ime" type="text" name="Ime" /></td>
+            </tr>
+            <tr>
+                <td>Prezime: </td>
+                <td><input id="prezime" type="text" name="Prezime" /></td>
+            </tr>
+
+            <tr>
+                <td>JMBG: </td>
+                <td><input id="jmbg" type="text" name="JMBG" /></td>
+            </tr>
+            <tr>
+                <td>Pol: </td>
+                <td>
+                    <select name="Pol" id="pol">
+                        <option>
+                            Zenski
+                        </option>
+                        <option>
+                            Muski
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Broj telefona: </td>
+                <td><input id="brTelefona" type="text" name="KontaktTelefon" /></td>
+            </tr>
+            <tr>
+                <td>Email adresa:</td>
+                <td><input id="emailAdr" type="email" name="Email" /></td>
+            </tr>
+            <tr><td><br /></td></tr>
+            <tr>
+                <td></td>
+                <td align="right"> <button id="registracija" type="button">Registruj se</button></td>
+            </tr>
+        </table>
+        <p id="greskaRegistracija"></p>
+      </div>
+</body>
+</html>
