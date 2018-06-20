@@ -7,12 +7,11 @@
     <meta name="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+    <script src="../../Scripts/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="Scripts/jquery-1.10.2.js"></script>
     <link href="../Content/NextStyle.css" rel="stylesheet" />
    
     <script type="text/javascript">
@@ -73,20 +72,323 @@
             $("#NaslovK").text(ime);
 
             let korisnik = {
-                KorisnickoIme: `${ime}`,
+                Kime: `${ime}`,
             };
-        });
+    
         $.ajax({
-            type: 'PUT',//promeni na GET jer saljes samo korisnicko ime
-            url: '/api/Prijava/',
+            type: 'PUT',
+            url: '/api/Prijava/' + 0,
             data: JSON.stringify(korisnik),
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (data) {
+                korisnikovAJDI = data.id;
+                korisnik1 = data;
+               uloga = data.uloga;
+               if (data.uloga == 0) {
+                   alert("Musterija logovana");
+                   $("#korisnik").css("display", "block");
+                   $("#korisnik").css("clear", "both");
+                   $("#korisnik").css("position", "sticky");
+                   $("#fitriranjeVoznji").show();
+
+                   $('#naruciVoznju').show();
+
+                   $.ajax({
+                       type: 'GET',
+                       url: '/api/Voznja',
+                       success: function (data) {
+                           if (data.legth != 0) {
+                               let sviPoz = 0;
+                               for (var v in data) {
+                                   if (data[v].StatusVoznje == 0 || (data[v].StatusVoznje == 6 && data[v].Komentar.Opis == " ")) {
+                                       sviPoz = 1;
+                                       break;
+                                   }
+                               }
+
+                               let korisnikoveVoznje = 0;
+                               for (var v in data) {
+                                   if (data[v].idKorisnik == korisnikovAJDI)
+                                       korisnikoveVoznje = 1;
+                               }
+
+                               if (korisnikoveVoznje == 1) {
+                                   let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                   tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                                   tabelaVoznji += "<th>Komentar</th>";
+                                   tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th>"
+                                   if (sviPoz == 0) {
+                                       tabelaVoznji += `</tr>`;
+                                   }
+                                   else {
+                                       tabelaVoznji += "<th colspan =\"2\"></th></tr>";
+                                   }
 
 
 
-        })
+                                   /////////////////////////////////////////////////////////////////
+                                   for (voznja in data) {
+                                       if (data[voznja].idKorisnik == korisnikovAJDI) {
+                                           var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
+
+                                           var datum =
+                                               currentdate.getUTCFullYear() + "/" +
+                                               ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                               ("0" + currentdate.getUTCDate()).slice(-2);
+
+                                           var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                               ("0" + currentdate.getUTCMinutes()).slice(-2);
+                                           tabelaVoznji += `<tr>
+                                                                <td>${data[voznja].Id}</td>
+                                                                <td>${datum} u ${vreme}h</td>
+                                                                <td>
+
+                                                                ${data[voznja].Lokacija.Adresa.UlicaBroj},
+                                                               ${data[voznja].Lokacija.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Lokacija.Adresa.PozivniBrojMesta}
+                                                               </td>`;
+
+
+                                           if (data[voznja].Iznos != "0") {
+                                               tabelaVoznji += `<td>
+
+                                                                ${data[voznja].Odrediste.Adresa.UlicaBroj},
+                                                               ${data[voznja].Odrediste.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Odrediste.Adresa.PozivniBrojMesta}
+                                                                    </td>
+                                                                    <td>${data[voznja].Iznos}</td>`;
+                                           }
+                                           else {
+                                               tabelaVoznji += `<td></td>
+                                                                    <td></td>`;
+                                           }
+
+                                           if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5") {
+                                               tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+
+                                           } else {
+                                               tabelaVoznji += `<td> </td>`;
+
+                                           }
+
+
+                                           tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                                <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
+                                                                `;
+                                           if (data[voznja].StatusVoznje == 0) {
+
+
+                                               tabelaVoznji += `
+                                                                <td><button id="otkaziVoznju" value="${data[voznja].Id}">Odustani</button></td>
+                                                                <td><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
+                                                                    </tr>`;
+                                           }
+                                           else if (data[voznja].StatusVoznje == 2) {
+                                               tabelaVoznji += `                                                                
+                                                                <td align="center" colspan="2"><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
+                                                                    </tr>`;
+                                           }
+
+                                           else if (data[voznja].StatusVoznje == 6 && data[voznja].Komentar.Opis == " ") {
+                                               tabelaVoznji += `                                                                
+                                                                <td align="center" colspan="2"><button id="korisnikDodajKomentar" value="${data[voznja].Id}">Dodaj komentar</button></td>
+                                                                    </tr>`;
+
+
+                                           }
+
+                                           else {
+                                               if (sviPoz == 0) {
+                                                   tabelaVoznji += `</tr>`;
+                                               }
+                                               else {
+                                                   tabelaVoznji += `
+                                                                <td colspan=\"2\"></td>
+                                                                    </tr>`;
+                                               }
+                                           }
+                                       }
+                                   }
+                                   tabelaVoznji += "</table>";
+                                   $("#tabelaVoznji").html(tabelaVoznji);
+
+                               }
+                               else {
+                                   $("#tabelaVoznji").html("<h3 align=\"center\">Nemate voznje</h3>");
+
+                               }
+
+
+                           }
+                       }
+                   })
+               }
+               else if (data.Uloga == 1)
+               {
+                   alert("Dispecer logovan");
+                   $('#dodajVozaca').show();
+                   $(".dropdown").show();
+                   $("#dispecerPretraga").show();
+
+                   $("#dispecer").css("display", "block");
+                   $("#dispecer").css("clear", "both");
+                   $("#dispecer").css("position", "sticky");
+
+                   $.ajax({
+                       type: 'GET',
+                       url: '/api/Voznja',//ajdidispecera
+                       success: function (data) {
+                           let imaDispecer = 0;
+                           for (voznja in data) {
+                               if (data[voznja].idDispecer == korisnikovAJDI)
+                                   imaDispecer = 1;
+                           }
+                           if (data.length == 0) {
+                               $("#tabelaVoznjiDispecera").html("<h4 align=\"center\">Trenutno nemate ni jenu voznju :)</h4>");
+
+                           } else {
+                               if (imaDispecer == 1) {
+                                   let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                   tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                                   tabelaVoznji += "<th>Komentar</th>";
+                                   tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
+
+                                   for (voznja in data) {
+                                       if (data[voznja].idDispecer == korisnikovAJDI) {
+                                           var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
+
+                                           var datum =
+                                               currentdate.getUTCFullYear() + "/" +
+                                               ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                               ("0" + currentdate.getUTCDate()).slice(-2);
+
+                                           var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                               ("0" + currentdate.getUTCMinutes()).slice(-2);
+                                           tabelaVoznji += `<tr>
+                                                                <td>${data[voznja].Id}</td>
+                                                                <td>${datum} u ${vreme}h</td>
+                                                                <td>
+
+                                                                ${data[voznja].Lokacija.Adresa.UlicaBroj},
+                                                               ${data[voznja].Lokacija.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Lokacija.Adresa.PozivniBrojMesta}
+                                                               </td>`;
+
+
+                                           if (data[voznja].Iznos != "0") {
+                                               tabelaVoznji += `<td>
+
+                                                                ${data[voznja].Odrediste.Adresa.UlicaBroj},
+                                                               ${data[voznja].Odrediste.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Odrediste.Adresa.PozivniBrojMesta}
+                                                                    </td>
+                                                                    <td>${data[voznja].Iznos}</td>`;
+                                           } else {
+                                               tabelaVoznji += `<td></td>
+                                                                    <td></td>`;
+                                           }
+
+                                           if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5") {
+                                               tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+
+                                           } else {
+                                               tabelaVoznji += `<td> </td>`;
+
+                                           }
+                                           tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                                <td>${getEnumStatus(data[voznja].StatusVoznje)}</td></tr>
+                                                                `;
+
+                                       }
+                                   }
+                                   tabelaVoznji += "</table>";
+                                   $("#tabelaVoznjiDispecera").html(tabelaVoznji);
+
+                               }
+
+                               else {
+                                   $("#tabelaVoznjiDispecera").html("<h3 align=\"center\">Trenitno nemate voznji</h3>");
+
+                               }
+                           }
+                       }
+                   })
+                   $.ajax({
+                       type: 'GET',
+                       url: '/api/Voznja',
+                       success: function (data) {
+
+
+                           if (data.length == 0) {
+                               $("#tabelaVoznjiDispecera").html("<h4 align=\"center\">Trenutno nema voznji u sistemu :)</h4>");
+
+                           } else {
+                               let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                               tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                               tabelaVoznji += "<th>Komentar</th>";
+                               tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
+                               for (voznja in data) {
+                                   var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
+
+                                   var datum =
+                                       currentdate.getUTCFullYear() + "/" +
+                                       ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                       ("0" + currentdate.getUTCDate()).slice(-2);
+
+                                   var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                       ("0" + currentdate.getUTCMinutes()).slice(-2);
+                                   tabelaVoznji += `<tr>
+                                                                <td>${data[voznja].Id}</td>
+                                                                <td>${datum} u ${vreme}h</td>
+                                                                <td>
+
+                                                                ${data[voznja].Lokacija.Adresa.UlicaBroj},
+                                                               ${data[voznja].Lokacija.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Lokacija.Adresa.PozivniBrojMesta}
+                                                               </td>`;
+
+
+                                   if (data[voznja].Iznos != "0") {
+                                       tabelaVoznji += `<td>
+
+                                                                ${data[voznja].Odrediste.Adresa.UlicaBroj},
+                                                               ${data[voznja].Odrediste.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Odrediste.Adresa.PozivniBrojMesta}
+                                                                    </td>
+                                                                    <td>${data[voznja].Iznos}</td>`;
+                                   } else {
+                                       tabelaVoznji += `<td></td>
+                                                                    <td></td>`;
+                                   }
+
+                                   if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5") {
+                                       tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+
+                                   } else {
+                                       tabelaVoznji += `<td> </td>`;
+
+                                   }
+                                   tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                                <td>${getEnumStatus(data[voznja].StatusVoznje)}</td></tr>
+                                                                `;
+
+                               }
+                               tabelaVoznji += "</table>";
+                               $("#tabelaSvihVoznji").html(tabelaVoznji);
+                           }
+
+
+
+                       }
+                   })
+
+               }
+
+            }
+
+            });
+        });
 
     </script>
 
@@ -138,7 +440,7 @@
     <!-- First Container -->
     <div id="pocetna1" class="container-fluid bg-1 text-center">
         <h3 class="margin">Dobrodosli!</h3>
-        <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+       <!-- <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">-->
         <h3>064 309 3116</h3>
     </div>
     <!-- Second Container -->

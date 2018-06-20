@@ -22,9 +22,9 @@ namespace WebAPI.Models
             while ((line = sr.ReadLine()) != null)
             {
                 string[] tokens = line.Split(';');
-                Dispecer p = new Dispecer(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7]);
-            
-                list.Add(tokens[0], p);
+                Dispecer p = new Dispecer(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7],tokens[8]);
+                p.Id = list.Count.ToString();
+                list.Add(p.Id, p);
             }
             sr.Close();
             stream.Close();

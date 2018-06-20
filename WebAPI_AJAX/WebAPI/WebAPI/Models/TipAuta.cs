@@ -7,6 +7,6 @@ namespace WebAPI.Models
 {
     public enum TipAuta
     {
-        putnicki,kombi
+        putnicki,kombi,svejedno
     }
 }

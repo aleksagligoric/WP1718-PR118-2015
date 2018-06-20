@@ -7,8 +7,9 @@ namespace WebAPI.Models
 {
     public class Dispecer : Korisnik
     {
-        public Dispecer(string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email, string pol)
+        public Dispecer(string id,string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email, string pol)
         {
+            this.Id = id;
             this.Kime = kime;
             this.lozinka = lozinka;
             this.ime = ime;

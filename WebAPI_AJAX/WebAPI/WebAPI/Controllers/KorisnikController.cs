@@ -71,7 +71,8 @@ namespace WebAPI.Controllers
                 {
                     string path = @"D:\Aleksa\WEBProjekat\WP1718-PR118-2015\WebAPI_AJAX\WebAPI\WebAPI\Baza\korisnici.txt";
                     StringBuilder sb = new StringBuilder();
-                    sb.Append( korisnik.Kime+ ";" + korisnik.lozinka+ ";" + korisnik.ime + ";" + korisnik.prezime + ";" + korisnik.JMBG + ";" + korisnik.telefon + ";" + korisnik.email + ";" + korisnik.pol + "\n");
+                    korisnik.Id = korisnici.list.Count.ToString();
+                    sb.Append(korisnik.Id+ ";" + korisnik.Kime+ ";" + korisnik.lozinka+ ";" + korisnik.ime + ";" + korisnik.prezime + ";" + korisnik.JMBG + ";" + korisnik.telefon + ";" + korisnik.email + ";" + korisnik.pol + "\n");
 
                     if (!File.Exists(path))
                         File.WriteAllText(path, sb.ToString());

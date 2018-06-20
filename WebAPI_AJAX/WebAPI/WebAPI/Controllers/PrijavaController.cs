@@ -18,24 +18,38 @@ namespace WebAPI.Controllers
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
-            if (korisnici.list.ContainsKey(korisnik.Kime))
+            foreach (var kk in korisnici.list)
             {
-                k = korisnici.list[korisnik.Kime];
-                k.uloga = Models.Uloga.musterija;
-                return k;
+                if (kk.Value.Kime == korisnik.Kime)
+                {
+                    k = kk.Value;
+                    k.uloga = Models.Uloga.musterija;
+                    return k;
+                }
             }
-            if (dispeceri.list.ContainsKey(korisnik.Kime))
+
+            foreach (var kk in dispeceri.list)
             {
-                k = dispeceri.list[korisnik.Kime];
-                k.uloga = Models.Uloga.dispecer;
-                return k;
+                if (kk.Value.Kime == korisnik.Kime)
+                {
+                    k = kk.Value;
+                    k.uloga = Models.Uloga.dispecer;
+
+                    return k;
+                }
             }
-            if (vozaci.list.ContainsKey(korisnik.Kime))
+
+            foreach (var kk in vozaci.list)
             {
-                k = vozaci.list[korisnik.Kime];
-                k.uloga = Models.Uloga.vozac;
-                return k;
+                if (kk.Value.Kime == korisnik.Kime)
+                {
+                    k = kk.Value;
+                    k.uloga = Models.Uloga.vozac;
+
+                    return k;
+                }
             }
+
             return k;
         }
 

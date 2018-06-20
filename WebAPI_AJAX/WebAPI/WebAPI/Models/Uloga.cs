@@ -2,6 +2,6 @@
 {
     public enum Uloga
     {
-        vozac,musterija,dispecer
+       musterija,dispecer,vozac
     };
 }

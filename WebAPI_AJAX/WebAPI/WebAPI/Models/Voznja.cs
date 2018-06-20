@@ -7,37 +7,100 @@ namespace WebAPI.Models
 {
     public class Voznja
     {
-        public DateTime vreme { get; set; }
-        public string lokacija { get; set; }
-        public  TipAuta tip { get; set; }
+        public Voznja() { }
 
-       public Musterija musterija { get; set; }
+        public string Id { get; set; }
+        public DateTime DatumVreme { get; set; }
+        public Lokacija Lokacija { get; set; }
 
-        public Lokacija odrediste { get; set; }
+        public TipAuta Automobil { get; set; }
 
-        public Dispecer diespecer { get; set; }
+        public string idKorisnik { get; set; }
 
-        public int iznos { get; set; }
+        public Lokacija Odrediste { get; set; }
 
-        public  Komentar komentar { get; set; }
+        public string idDispecer { get; set; }
+        public string idVozac { get; set; }
+        public double Iznos { get; set; }
 
-        public StatusVoznje status { get; set; }
+        public Komentar Komentar { get; set; }
 
-        public Voznja(DateTime vreme, string lokacija, TipAuta tip, Musterija musterija, Lokacija odrediste, Dispecer diespecer, int iznos, Komentar komentar, StatusVoznje status)
+        public StatusVoznje StatusVoznje { get; set; }
+
+
+        public int Ocena { get; set; }
+
+
+        public Voznja(string id, string datum, double xDolaziste, double yDolaziste, string ulicaBrojDolaziste, string mestoDolaziste, string zipDolaziste, string tipAuta, string idKorisnika,
+          double xOdlaziste, double yOdlaziste, string ulicaBrojOdlaziste, string mestoOdlaziste, string zipOdlaziste,
+            string idDispecera, string idVozaca, double iznos, string opisKomentar, string datumKomentar, string idKorKomentar, string idVoznjaKomentar, string ocenaKomentar
+            , string statusVoznje) : this()
         {
-            this.vreme = vreme;
-            this.lokacija = lokacija;
-            this.tip = tip;
-            this.musterija = musterija;
-            this.odrediste = odrediste;
-            this.diespecer = diespecer;
-            this.iznos = iznos;
-            this.komentar = komentar;
-            this.status = status;
-        }
-        public Voznja()
-        {
-                
+            Id = id;
+            DatumVreme = DateTime.Parse(datum);
+            Lokacija start = new Lokacija();
+            start.x = xDolaziste;
+            start.y = yDolaziste;
+            Adresa startAdr = new Adresa();
+            startAdr.UlicaBroj = ulicaBrojDolaziste;
+            startAdr.NaseljenoMesto = mestoDolaziste;
+            startAdr.PozivniBrojMesta = zipDolaziste;
+            start.adresa = startAdr;
+            Lokacija = start;
+            if (tipAuta.Equals("Putnicki")) { Automobil = TipAuta.putnicki; } else if (tipAuta.Equals("Kombi")) { Automobil = TipAuta.kombi; } else if (tipAuta.Equals("Svejedno")) { Automobil = TipAuta.svejedno; };
+            idKorisnik = idKorisnika;
+            Lokacija end = new Lokacija();
+            end.x = xOdlaziste;
+            end.y = yOdlaziste;
+            Adresa endAdr = new Adresa();
+            endAdr.UlicaBroj = ulicaBrojOdlaziste;
+            endAdr.NaseljenoMesto = mestoOdlaziste;
+            endAdr.PozivniBrojMesta = zipOdlaziste;
+            end.adresa = endAdr;
+            Odrediste = end;
+
+            idDispecer = idDispecera;
+            idVozac = idVozaca;
+
+            Iznos = iznos;
+
+            Komentar komentar = new Komentar();
+            komentar.DatumObjave = datumKomentar;
+            komentar.Ocena = ocenaKomentar;
+            komentar.idVoznja = idVoznjaKomentar;
+            komentar.idKorisnik = idKorKomentar;
+            komentar.Opis = opisKomentar;
+            Komentar = komentar;
+
+            if (statusVoznje.Equals("Kreirana"))
+            {
+                StatusVoznje = StatusVoznje.Kreirana;
+            }
+            else if (statusVoznje.Equals("Formirana"))
+            {
+                StatusVoznje = StatusVoznje.Formirana;
+            }
+            else if (statusVoznje.Equals("Obradjena"))
+            {
+                StatusVoznje = StatusVoznje.Obradjena;
+            }
+            else if (statusVoznje.Equals("Prihvacena"))
+            {
+                StatusVoznje = StatusVoznje.Prihvacena;
+            }
+            else if (statusVoznje.Equals("Otkazana"))
+            {
+                StatusVoznje = StatusVoznje.Otkazana;
+            }
+            else if (statusVoznje.Equals("Neuspesna"))
+            {
+                StatusVoznje = StatusVoznje.Neuspesna;
+            }
+            else if (statusVoznje.Equals("Uspesna"))
+            {
+                StatusVoznje = StatusVoznje.Uspesna;
+            }
+
         }
     }
 }

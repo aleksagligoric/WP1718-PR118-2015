@@ -7,6 +7,13 @@ namespace WebAPI.Models
 {
     public enum StatusVoznje
     {
-        Načekanju, Formirana, Obrađena, Prihvaćena, Otkazana, Neuspešna, Uspešna
+        Kreirana, 
+        Formirana,
+        Obradjena,
+        Prihvacena,
+        Otkazana,
+        Neuspesna,
+        Uspesna,
+        Utoku,
     }
 }

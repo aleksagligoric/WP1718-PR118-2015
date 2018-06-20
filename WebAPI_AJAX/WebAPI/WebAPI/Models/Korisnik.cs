@@ -8,7 +8,7 @@ namespace WebAPI.Models
 {
     public class Korisnik
     {
-        
+        public string Id { get; set; }
         public   string Kime { get; set; }
         public string lozinka { get; set; }
         public string ime { get; set; }
@@ -31,8 +31,9 @@ namespace WebAPI.Models
           
         }
 
-        public Korisnik(string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email,string pol)
+        public Korisnik(string id,string kime, string lozinka, string ime, string prezime, string jMBG, string telefon, string email,string pol)
         {
+            Id = id;
             Kime = kime;
             this.lozinka = lozinka;
             this.ime = ime;

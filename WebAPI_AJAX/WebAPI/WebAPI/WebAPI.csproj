@@ -140,11 +140,13 @@
     <Compile Include="Controllers\PrijavaController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VoznjaController.cs" />
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Automobil.cs" />
     <Compile Include="Models\Dispecer.cs" />
     <Compile Include="Models\Dispeceri.cs" />
     <Compile Include="Models\Komentar.cs" />
+    <Compile Include="Models\Komentari.cs" />
     <Compile Include="Models\Korisnici.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Lokacija.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Models\Vozac.cs" />
     <Compile Include="Models\Vozaci.cs" />
     <Compile Include="Models\Voznja.cs" />
+    <Compile Include="Models\Voznje.cs" />
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
     <Compile Include="Properties\App_Start\RouteConfig.cs" />
@@ -198,8 +201,10 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Baza\dispeceri.txt" />
+    <Content Include="Baza\komentari.txt" />
     <Content Include="Baza\korisnici.txt" />
     <Content Include="Baza\vozaci.txt" />
+    <Content Include="Baza\voznje.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\NextStyle.css" />
