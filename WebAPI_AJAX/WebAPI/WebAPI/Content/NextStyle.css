@@ -1,0 +1,152 @@
+﻿body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: black;
+}
+
+p {
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+}
+
+.margin {
+    margin-bottom: 45px;
+}
+
+.bg-1 {
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+}
+
+.bg-2 {
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+
+.bg-3 {
+    background-color: #ffffff; /* White */
+    color: #555555;
+}
+
+.bg-4 {
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+}
+
+.container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.navbar-nav li a:hover {
+    color: #1abc9c !important;
+    font-size: 150%;
+}
+
+#korisnikProfil {
+    color: #1abc9c;
+}
+
+    #korisnikProfil:hover {
+        background-color: #1abc9c;
+        color: white;
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+#staraLokacijaP {
+    color: #1abc9c;
+    font-weight: bold;
+}
+
+#stariAuto {
+    color: #1abc9c;
+    font-weight: bold;
+}
+
+
+.dropbtn {
+    background-color: #f8f8f8;
+    color: #a7a5a6;
+    padding: 14px;
+    font-size: 13px;
+    border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f8f8f8;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+/* Change color of dropdown links on hover */
+
+.dropdown:hover .dropbtn {
+    color: #1abc9c;
+}
+
+#fitriranjeVoznji, #dispecerPretraga {
+    color: #1abc9c;
+    border: 1px solid rgba(26, 188, 156,.1);
+    border-radius: 65%;
+}
+
+    #fitriranjeVoznji:hover {
+        color: #1abc9c;
+        border: 1px solid #1abc9c;
+        border-radius: 65%;
+    }
+
+    #dispecerPretraga:hover {
+        color: #1abc9c;
+        border: 1px solid #1abc9c;
+        border-radius: 65%;
+    }
+
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+
+

@@ -24,7 +24,7 @@
                 alert($(this).text());
             });
 
-           $("#load-products").click(function () {
+            $("#load-products").click(function () {
                 $.get("/api/registracija", function (data, status) {
                     let tableOfProducts = "<table border='1'>";
                     for (korisnik in data) {
@@ -77,6 +77,59 @@
                 $("#prijavaFrame").hide(1000);
                 $("#registracijaFrame").show(1000);
             });
+
+            $("#registracija").click(function () {
+
+                let ki = $('#korImeReg').val();
+                let p = $('#korPassReg').val();
+                let i = $('#ime').val();
+                let pr = $('#prezime').val();
+                let j = $('#jmbg').val();
+                let e = $('#emailAdr').val();
+                let t = $('#brTelefona').val();
+
+                if (ki == "" || p == "" || i == "" || pr == "" || j == "" || e == "" || t == "")
+                {
+                    alert("Popunite sva polja");
+                }
+                else
+                    {
+
+                        let korisnik = {
+                            Kime: `${$('#korImeReg').val()}`,
+                            lozinka: `${$('#korPassReg').val()}`,
+                            ime: `${$('#ime').val()}`,
+                            prezime: `${$('#prezime').val()}`,
+                            pol: `${$('#pol').val()}`,
+                            JMBG: `${$('#jmbg').val()}`,
+                            email: `${$('#emailAdr').val()}`,
+                            telefon: `${$('#brTelefona').val()}`,
+                    };
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/Korisnik',
+                            data: JSON.stringify(korisnik),
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            success: function (data) {
+                                if (!data) {
+                                    $("#greska").css("color", "red");
+                                    // $("#greska").text("Postoji korisnik sa tim username-om");
+                                    $("#korImeReg").focus();
+                                    alert("Korisnicko ime je zauzeto");
+                                }
+                                else {
+                                    $("#greska").text("");
+                                    $("#prikazi").show();
+                                    $("#registracijaDeo").hide(1000);
+                                }
+
+                            }
+                        })
+                    }
+
+                });
+
         });
     </script>
 
@@ -114,7 +167,7 @@
 
     <div id="greskaPrijava"></div>
     <div id="registracijaFrame" style="width:800px; margin:0 auto;">
-        <h2> Registracija :)</h2>
+        <h2> Registracija </h2>
         <table>
             <tr>
                 <td>Korisnicko ime: </td>

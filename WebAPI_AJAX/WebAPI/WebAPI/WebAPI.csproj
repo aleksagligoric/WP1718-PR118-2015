@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -201,10 +202,12 @@
     <Content Include="Baza\vozaci.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\NextStyle.css" />
     <Content Include="Content\reg_style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="HTML\index.html" />
+    <Content Include="HTML\Next.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -20,13 +20,13 @@ namespace WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Korisnici korisnici = new Korisnici("~/App_Data/korisnici.txt");
+            Korisnici korisnici = new Korisnici("~/Baza/korisnici.txt");
             HttpContext.Current.Application["korisnici"] = korisnici;
 
-            Dispeceri dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
+            Dispeceri dispeceri = new Dispeceri("~/Baza/dispeceri.txt");
             HttpContext.Current.Application["dispeceri"] = dispeceri;
 
-            Vozaci vozaci = new Vozaci("~/App_Data/vozaci.txt");
+            Vozaci vozaci = new Vozaci("~/Baza/vozaci.txt");
             HttpContext.Current.Application["vozaci"] = vozaci;
 
             // Voznje voznje = new Voznje("~/App_Data/voznje.txt");
