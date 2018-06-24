@@ -28,7 +28,7 @@
                 $.get("/api/registracija", function (data, status) {
                     let tableOfProducts = "<table border='1'>";
                     for (korisnik in data) {
-                        tableOfProducts += `<tr><td>${data[korisnik].KorisnickoIme}</td><td>${data[korisnik].Lozinka}</td></tr>`;
+                        tableOfProducts += `<tr><td>${data[korisnik].Kime}</td><td>${data[korisnik].lozinka}</td></tr>`;
                     }
                     tableOfProducts += "</table>";
                     $("#content").html(tableOfProducts);
@@ -36,7 +36,7 @@
             });
 
             $("#prijava").click(function () {
-                let ki = $('#korIme').val();
+                let ki = $('#korime').val();
                 let p = $('#korPass').val();
 
                 if (ki == "" || p == "") {
@@ -44,7 +44,7 @@
                 }
                 else {
                     let korisnik = {
-                        Kime: `${$('#korIme').val()}`,
+                        Kime: `${$('#korime').val()}`,
                         lozinka: `${$('#korPass').val()}`,
                     };
 
@@ -80,7 +80,7 @@
 
             $("#registracija").click(function () {
 
-                let ki = $('#korImeReg').val();
+                let ki = $('#korimeReg').val();
                 let p = $('#korPassReg').val();
                 let i = $('#ime').val();
                 let pr = $('#prezime').val();
@@ -96,7 +96,7 @@
                     {
 
                         let korisnik = {
-                            Kime: `${$('#korImeReg').val()}`,
+                            Kime: `${$('#korimeReg').val()}`,
                             lozinka: `${$('#korPassReg').val()}`,
                             ime: `${$('#ime').val()}`,
                             prezime: `${$('#prezime').val()}`,
@@ -115,7 +115,7 @@
                                 if (!data) {
                                     $("#greska").css("color", "red");
                                     // $("#greska").text("Postoji korisnik sa tim username-om");
-                                    $("#korImeReg").focus();
+                                    $("#korimeReg").focus();
                                     alert("Korisnicko ime je zauzeto");
                                 }
                                 else {
@@ -128,7 +128,11 @@
                         })
                     }
 
-                });
+            });
+         
+
+
+
 
         });
     </script>
@@ -150,12 +154,12 @@
         <h2>PRIJAVA</h2>
         <table>
             <tr>
-                <td>Ime: </td>
-                <td><input id="korIme" type="text" name="KorisnickoIme" /></td>
+                <td>ime: </td>
+                <td><input id="korime" type="text" name="Kime" /></td>
             </tr>
             <tr>
-                <td>Lozinka: </td>
-                <td><input id="korPass" type="password" name="Lozinka" /></td>
+                <td>lozinka: </td>
+                <td><input id="korPass" type="password" name="lozinka" /></td>
             </tr>
             <tr><td><br /> </td><td></td></tr>
             <tr>
@@ -172,21 +176,21 @@
             <tr>
                 <td>Korisnicko ime: </td>
                 <td>
-                    <input id="korImeReg" type="text" name="KorisnickoIme" />
+                    <input id="korimeReg" type="text" name="Kime" />
                 </td>
 
             </tr>
             <tr>
-                <td>Lozinka: </td>
-                <td><input id="korPassReg" type="password" name="Lozinka" /></td>
+                <td>lozinka: </td>
+                <td><input id="korPassReg" type="password" name="lozinka" /></td>
             </tr>
             <tr>
-                <td>Ime: </td>
-                <td><input id="ime" type="text" name="Ime" /></td>
+                <td>ime: </td>
+                <td><input id="ime" type="text" name="ime" /></td>
             </tr>
             <tr>
-                <td>Prezime: </td>
-                <td><input id="prezime" type="text" name="Prezime" /></td>
+                <td>prezime: </td>
+                <td><input id="prezime" type="text" name="prezime" /></td>
             </tr>
 
             <tr>
@@ -208,11 +212,11 @@
             </tr>
             <tr>
                 <td>Broj telefona: </td>
-                <td><input id="brTelefona" type="text" name="KontaktTelefon" /></td>
+                <td><input id="brTelefona" type="text" name="telefon" /></td>
             </tr>
             <tr>
-                <td>Email adresa:</td>
-                <td><input id="emailAdr" type="email" name="Email" /></td>
+                <td>email adresa:</td>
+                <td><input id="emailAdr" type="email" name="email" /></td>
             </tr>
             <tr><td><br /></td></tr>
             <tr>
