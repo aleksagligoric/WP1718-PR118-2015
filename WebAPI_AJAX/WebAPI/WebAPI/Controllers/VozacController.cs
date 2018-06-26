@@ -14,6 +14,33 @@ namespace WebAPI.Controllers
 {
     public class VozacController : ApiController
     {
+        public bool Put(string id, [FromBody]Vozac vozac)//menjam samo vozaca
+        {
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
+
+
+            Vozac vv = vozaci.list[id];
+         /*   if (vozac.Ban != 2)
+            {
+                vv.Ban = vozac.Ban;
+            }*/
+
+            if (vozac.Zauzet != 2)
+            {
+                vv.Zauzet = vozac.Zauzet;
+            }
+
+            string path = "~/Baza/vozaci.txt";
+            path = HostingEnvironment.MapPath(path);
+
+            var lines = File.ReadAllLines(path);
+            lines[int.Parse(id)] = vv.Id + ";" + vv.Kime + ";" + vv.lozinka + ";" + vv.ime + ";" + vv.prezime + ";" + vv.JMBG + ";" + vv.telefon + ";" + vv.pol + ";" + vv.email + ";" + vv.Lokacija.x + ";" + vv.Lokacija.y + ";" + vv.Lokacija.adresa.UlicaBroj + ";" + vv.Lokacija.adresa.NaseljenoMesto + ";" + vv.Lokacija.adresa.PozivniBrojMesta + ";" + vv.Automobil.BrTaksija + ";" + vv.Automobil.godiste + ";" + vv.Automobil.BrRegistracije + ";" + vv.Automobil.tipAuta+ ";" + vv.Zauzet;
+            File.WriteAllLines(path, lines);
+
+            vozaci = new Vozaci("~/Baza/vozaci.txt");
+            HttpContext.Current.Application["vozaci"] = vozaci;
+            return true;
+        }
         public List<Vozac> Get()
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
