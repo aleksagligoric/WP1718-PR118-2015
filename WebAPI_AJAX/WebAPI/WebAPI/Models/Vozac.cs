@@ -14,7 +14,7 @@ namespace WebAPI.Models
         public Vozac() { }
 
 
-        public Vozac( string id,string ime, string prezime, string Kime, string lozinka, string jmbg, string kontakt, string pol,
+        public Vozac( string id, string Kime, string lozinka, string ime, string prezime, string jmbg, string kontakt, string pol,
             string email, double x, double y, string ulicaBroj, string mesto, string zip, string brojAuta, int godisteAuta, string registracijaAuta
             , string tipAuta, int z) : this()
         {

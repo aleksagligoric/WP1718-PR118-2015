@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
             return vozaci.list[id];
         }
 
-        public bool Post([FromBody]Vozac vozac)
+       public bool Post([FromBody]Vozac vozac)
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
             StringBuilder sb = new StringBuilder();
             vozac.Id = vozaci.list.Count.ToString();
             vozac.Automobil.BrTaksija = (vozaci.list.Count + 100).ToString();
-            sb.Append(vozac.Id + ";" + vozac.ime + ";" + vozac.prezime + ";" + vozac.Kime + ";" + vozac.lozinka + ";" + vozac.JMBG + ";" + vozac.telefon + ";" + vozac.pol + ";" + vozac.email + ";" + vozac.Lokacija.x + ";" + vozac.Lokacija.y + ";" + vozac.Lokacija.adresa.UlicaBroj + ";" + vozac.Lokacija.adresa.NaseljenoMesto + ";" + vozac.Lokacija.adresa.PozivniBrojMesta + ";" + vozac.Automobil.BrTaksija+ ";" + vozac.Automobil.godiste + ";" + vozac.Automobil.BrRegistracije + ";" + vozac.Automobil.tipAuta + ";" + vozac.Zauzet + "\n");
+            sb.Append(vozac.Id + ";" + vozac.Kime + ";" + vozac.lozinka + ";" + vozac.ime + ";" + vozac.prezime + ";" + vozac.JMBG + ";" + vozac.telefon + ";" + vozac.pol + ";" + vozac.email + ";" + vozac.Lokacija.x + ";" + vozac.Lokacija.y + ";" + vozac.Lokacija.adresa.UlicaBroj + ";" + vozac.Lokacija.adresa.NaseljenoMesto + ";" + vozac.Lokacija.adresa.PozivniBrojMesta + ";" + vozac.Automobil.BrTaksija+ ";" + vozac.Automobil.godiste + ";" + vozac.Automobil.BrRegistracije + ";" + vozac.Automobil.tipAuta + ";" + vozac.Zauzet + "\n");
 
             if (!File.Exists(path))
                 File.WriteAllText(path, sb.ToString());

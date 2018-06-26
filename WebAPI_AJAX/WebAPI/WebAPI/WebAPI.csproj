@@ -134,10 +134,12 @@
     <Folder Include="Views\Registration\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AutomobilController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DispecerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
+    <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

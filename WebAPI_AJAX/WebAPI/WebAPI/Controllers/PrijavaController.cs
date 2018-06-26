@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
     public class PrijavaController : ApiController
     {
         // GET: Prijava
-        public Korisnik Put(string id, [FromBody]Korisnik korisnik)
+        public Korisnik Get(string id)
         {
             Korisnik k = null;
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
 
             foreach (var kk in korisnici.list)
             {
-                if (kk.Value.Kime == korisnik.Kime)
+                if (kk.Value.Kime == id)
                 {
                     k = kk.Value;
                     k.uloga = Models.Uloga.musterija;
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
 
             foreach (var kk in dispeceri.list)
             {
-                if (kk.Value.Kime == korisnik.Kime)
+                if (kk.Value.Kime == id)
                 {
                     k = kk.Value;
                     k.uloga = Models.Uloga.dispecer;
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
 
             foreach (var kk in vozaci.list)
             {
-                if (kk.Value.Kime == korisnik.Kime)
+                if (kk.Value.Kime == id)
                 {
                     k = kk.Value;
                     k.uloga = Models.Uloga.vozac;
