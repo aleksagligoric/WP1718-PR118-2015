@@ -1,1 +1,2 @@
-﻿0;06/26/2018 01:40;45.2439136948659;19.8420680525758;Bulevar cara Lazara 19; Novi Sad 21000;;putnicki;0;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+0;06/26/2018 01:40;45.2439136948659;19.8420680525758;Bulevar cara Lazara 19; Novi Sad 21000;;putnicki;0;0;0; ; ; ;0;1;0; ; ; ; ; ;Obradjena
+1;06/26/2018 02:10;45.2427781807142;19.8424316374333;Bulevar oslobođenja 131; Novi Sad 21000;;svejedno;0;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
