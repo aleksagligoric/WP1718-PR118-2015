@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
                 }
                 if (!postoji)
                 {
-                    string path = @"D:\Aleksa\WEBProjekat\WP1718-PR118-2015\WebAPI_AJAX\WebAPI\WebAPI\Baza\korisnici.txt";
+                    string path = @"D:\Aleksa\WEBProjekat\WebAPI_AJAX\WebAPI\WebAPI\Baza\korisnici.txt";
                     StringBuilder sb = new StringBuilder();
                     korisnik.Id = korisnici.list.Count.ToString();
                     sb.Append(korisnik.Id+ ";" + korisnik.Kime+ ";" + korisnik.lozinka+ ";" + korisnik.ime + ";" + korisnik.prezime + ";" + korisnik.JMBG + ";" + korisnik.telefon + ";" + korisnik.email + ";" + korisnik.pol + "\n");

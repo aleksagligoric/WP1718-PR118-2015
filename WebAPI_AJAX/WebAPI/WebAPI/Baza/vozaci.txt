@@ -1,1 +1,2 @@
 ﻿0;krco;k;Aleksa;glig;12312;0677977;Zenski;sdfasdf;45.2431156015278;19.8424262730152;Bulevar oslobođenja 129; Novi Sad 21000;;100;1923;2341234;putnicki;0
+2;vd;v;Vozac;V;fasdf;123;Zenski;adsf;45.2580595694403;19.8185385195286;Hadži Ruvimova 8; Novi Sad;;102;1987;2134214;putnicki;0

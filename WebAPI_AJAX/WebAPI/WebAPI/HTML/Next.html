@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Falmingo taxi</title>
+    <title>Taksi Sluzba</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Type" content="text/html;charset=UTF-8">
@@ -43,7 +43,7 @@
                 case 1: return "Muski";
             }
         }
-
+        let staje;
         $(document).ready(function () {
 
             $("#map1").hide();
@@ -88,9 +88,10 @@
                 success: function (data) {
                     korisnikovAJDI = data.Id;
                     korisnik1 = data;
+                    staje = data.uloga;
                     uloga = data.Uloga; // 0 korisnik , 1 dispecer , 2 vozac
 
-                    let myVar = setInterval(
+                   let myVar = setInterval(
                         function proveriStanje() {
                             if (uloga == 0) {//korisnik
                                 $.ajax({
@@ -98,7 +99,7 @@
                                     url: '/api/Korisnik/' + korisnikovAJDI,
                                     async: false,
                                     success: function (data) {
-                                        if (data.Ban == 1)
+                                       // if (data.Ban == 1)
                                             $(location).attr('href', 'index.html');
                                     }
                                 })
@@ -108,7 +109,7 @@
                                     url: '/api/Vozac/' + korisnikovAJDI,
                                     async: false,
                                     success: function (data) {
-                                        if (data.Ban == 1)
+                                       // if (data.Ban == 1)
                                             $(location).attr('href', 'index.html');
                                     }
                                 })
@@ -118,7 +119,7 @@
                    
 
                     if (data.uloga == 0) {
-                        alert("Musterija logovana");
+                        $('#uspesno').show();
                         $("#korisnik").css("display", "block");
                         $("#korisnik").css("clear", "both");
                         $("#korisnik").css("position", "sticky");
@@ -272,14 +273,14 @@
                         })
 
                     } else if (data.uloga == 1) {
-                        alert("Dispecer logovan");
+                      //  alert("Dispecer logovan");
                         $('#dodajVozaca').show();
                         $(".dropdown").show();
                         $("#blokiranje").show();
                         $("#fitriranjeVoznji").show();
-                        $("#lala").hide();
+                       /* $("#lala").hide();
                         $("#lala1").hide();
-                        $("#lala2").hide();
+                        $("#lala2").hide();*/
                         $("#dispecer").css("display", "block");
                         $("#dispecer").css("clear", "both");
                         $("#dispecer").css("position", "sticky");
@@ -353,8 +354,8 @@
                                                                         <td>${datum} u ${vreme}h</td>
                                                                         <td>
 
-                                                                        ${data[voznja].Lokacija.Adresa.UlicaBroj},
-                                                                       ${data[voznja].Lokacija.Adresa.NaseljenoMesto}
+                                                                        ${data[voznja].Lokacija.adresa.UlicaBroj},
+                                                                       ${data[voznja].Lokacija.adresa.NaseljenoMesto}
                                                                        </td>`;
 
 
@@ -493,12 +494,12 @@
                         })
                     }
                     else if (data.uloga == 2) {
-                        alert("Vozac logovana");
-                        $("#lala").hide();
+                       // alert("Vozac logovana");
+                      //  $("#lala").hide();
                         $("#voznjeNaCekanjuVozac").show();
 
-                        $("#lala1").hide();
-                        $("#lala2").hide();
+                       // $("#lala1").hide();
+                      //  $("#lala2").hide();
                         $('#promeniLokaciju').show();
                         $("#fitriranjeVoznji").show();//dodala , to treba i kod dispecera
 
@@ -1451,7 +1452,7 @@
                     success: function (data) {
                         if (data) {
                             alert("Uspesno promenjena lokacija");
-                            $(location).attr('href', 'single.html');
+                            $(location).attr('href', 'Next.html');
                         }
                     }
                 })
@@ -1659,7 +1660,7 @@
                         if (data) {
                             alert("Uspesno dodeljen komentar voznji");
                             alert("2");
-                            $(location).attr('href', 'single.html');
+                            $(location).attr('href', 'Next.html');
                         } else {
                             alert("Vec je postavljen komentar");
                         }
@@ -1777,14 +1778,71 @@
                 dataType: 'json',
                 success: function (data) {
                     alert("Uspesna izmena");
-                    $(location).attr('href', 'single.html');
+                    $(location).attr('href', 'Next.html');
 
                 }
             })
 
         });
 
+
        //////////////FORMIRANJE VOZNJE DISPECER
+        $("#formirajVoznju").click(function () {
+
+            var sadrzaj = $("#izmeni").text();
+            if (sadrzaj == "Promeni informacije") {
+                $("#block").hide();
+                $("#dispecer").css("display", "none");
+                $("#pretraga").hide();
+                $("#tabelaPretraga").hide();
+
+                $("#filtriranje").hide();
+                $("#tabelaPrikaza").hide();
+
+                $("#pocetna1").hide();
+                $("#profil").hide();
+                $("#pocetna").hide();
+                $("#dugmeDodajVozaca").hide();
+                $("#dodavanjeKorisnikaDiv").hide();
+                $("#dugmeIzmeni").hide();
+                $("#obradaVoznjeDispecer").hide();
+
+                $("#odabirVozaca").hide();
+                $("#map1").show();
+                $("#formiranjeVoznjeDispecer").show();//tu dodajem tabelu
+
+
+                let informacije = "<h2  align=\"center\" style=\"color:#1abc9c\" >Formiranje voznje</h2><hr /><br /><table class=\"izmenaTejbl\" border='1'>";
+                informacije += `           <tr>
+                                                    <td>Tip automobila:</td>
+                                                        <td>
+                                                        <select name="Tip" id="automobilFormiranje">
+                                                            <option>
+                                                                Svejedno
+                                                            </option>
+                                                            <option>
+                                                                Putnicki
+                                                            </option>
+                                                            <option>
+                                                                Kombi
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                    <tr><td colspan="2"><button class=\"dugmeSrc\" id="formirajVoznjuDugme">Formiraj</button></td></tr>
+
+                                                    `;
+                informacije += "</table>";
+                $('#formiranjeVoznjeDispecer').html(informacije);
+            } else {
+                alert("Niste sacuvali izmene.");
+                $("#izmeni").css("background-color", "#ff4d4d");
+
+            }
+
+        });
+
+
         $(document).on("click", "#formirajVoznjuDugme", function () {
             if (fulAdresa == '') {
                 alert("Unesite lokacju!");
@@ -2365,7 +2423,7 @@
                         success: function (data) {
                             alert("Uspesno dodavanje iznosa i odredista");
                             $("#podaciUspesno").text("OK!");
-                            $(location).attr('href', 'single.html');
+                            $(location).attr('href', 'Next.html');
 
                         }
                     })
@@ -2786,7 +2844,7 @@
                                                 url: '/api/Korisnik/' + data[voznja].idKorisnik,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
@@ -2799,17 +2857,17 @@
                                                 url: '/api/Vozac/' + data[voznja].idVozac,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
                                             tabelaVoznji += `<td> </td>`;
                                         }
 
-                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
                                         if (data[voznja].Iznos != "0") {
-                                            tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                            tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                         } else {
                                             tabelaVoznji += `<td></td><td></td>`;
                                         }
@@ -2838,7 +2896,7 @@
                                                 url: '/api/Korisnik/' + data[voznja].idKorisnik,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
@@ -2851,17 +2909,17 @@
                                                 url: '/api/Vozac/' + data[voznja].idVozac,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
                                             tabelaVoznji += `<td> </td>`;
                                         }
 
-                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
                                         if (data[voznja].Iznos != "0") {
-                                            tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                            tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                         } else {
                                             tabelaVoznji += `<td></td><td></td>`;
                                         }
@@ -2891,7 +2949,7 @@
                                                 url: '/api/Korisnik/' + data[voznja].idKorisnik,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
@@ -2904,17 +2962,17 @@
                                                 url: '/api/Vozac/' + data[voznja].idVozac,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
                                             tabelaVoznji += `<td> </td>`;
                                         }
 
-                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
                                         if (data[voznja].Iznos != "0") {
-                                            tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                            tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                         } else {
                                             tabelaVoznji += `<td></td><td></td>`;
                                         }
@@ -3098,7 +3156,7 @@
                                         tabelaVoznji += `<td> </td>`;
                                     }
 
-                                    tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                    tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
 
                                     if (data[voznja].Iznos != "0") {
@@ -3352,17 +3410,17 @@
                                                     url: '/api/Vozac/' + data[voznja].idVozac,
                                                     async: false,
                                                     success: function (data) {
-                                                        tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                        tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                     }
                                                 })
                                             } else {
                                                 tabelaVoznji += `<td> </td>`;
                                             }
-                                            tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                            tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
 
                                             if (data[voznja].Iznos != "0") {
-                                                tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                                tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                             } else {
                                                 tabelaVoznji += `<td></td><td></td>`;
                                             }
@@ -3391,7 +3449,7 @@
                                                 url: '/api/Korisnik/' + data[voznja].idKorisnik,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
@@ -3404,18 +3462,18 @@
                                                 url: '/api/Vozac/' + data[voznja].idVozac,
                                                 async: false,
                                                 success: function (data) {
-                                                    tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                    tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                 }
                                             })
                                         } else {
                                             tabelaVoznji += `<td> </td>`;
                                         }
 
-                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                        tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
 
                                         if (data[voznja].Iznos != "0") {
-                                            tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                            tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                         } else {
                                             tabelaVoznji += `<td></td><td></td>`;
                                         }
@@ -3447,7 +3505,7 @@
                                                     url: '/api/Korisnik/' + data[voznja].idKorisnik,
                                                     async: false,
                                                     success: function (data) {
-                                                        tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                        tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                     }
                                                 })
                                             } else {
@@ -3460,18 +3518,18 @@
                                                     url: '/api/Vozac/' + data[voznja].idVozac,
                                                     async: false,
                                                     success: function (data) {
-                                                        tabelaVoznji += `<td>${data.Ime} ${data.Prezime}</td>`;
+                                                        tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
                                                     }
                                                 })
                                             } else {
                                                 tabelaVoznji += `<td> </td>`;
                                             }
 
-                                            tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.Adresa.UlicaBroj},${data[voznja].Lokacija.Adresa.NaseljenoMesto}</td>`;
+                                            tabelaVoznji += `<td>${datum} u ${vreme}h</td><td>${data[voznja].Lokacija.adresa.UlicaBroj},${data[voznja].Lokacija.adresa.NaseljenoMesto}</td>`;
 
 
                                             if (data[voznja].Iznos != "0") {
-                                                tabelaVoznji += `<td>${data[voznja].Odrediste.Adresa.UlicaBroj},${data[voznja].Odrediste.Adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
+                                                tabelaVoznji += `<td>${data[voznja].Odrediste.adresa.UlicaBroj},${data[voznja].Odrediste.adresa.NaseljenoMesto}</td><td>${data[voznja].Iznos}</td>`;
                                             } else {
                                                 tabelaVoznji += `<td></td><td></td>`;
                                             }
@@ -3511,7 +3569,245 @@
 
         });
 
-        
+        $(document).on("change", "#tipKorisnika", function () {
+            $("#imePolje").val('');
+            $("#prezimePolje").val('');
+        });
+
+        $(document).on("click", "#pretraziPoDisp", function () {
+            //$("#tabelaPretraga").html('');
+            let opcija = $("#tipKorisnika").val();
+            if (opcija == null) {
+                alert("Niste izabrali tip korisnika");
+            } else {
+                let kriterijum;
+                let imePolje = $("#imePolje").val();
+                let przPolje = $("#prezimePolje").val();
+
+                if (imePolje == "" && przPolje == "") {
+                    alert("Morate uneti bar jedan kriterijum pretrage");
+                } else {
+                    if (imePolje == "" && przPolje != "") {
+                        kriterijum = 1;
+                    } else if (imePolje != "" && przPolje == "") {
+                        kriterijum = 0;
+                    } else if (imePolje != "" && przPolje != "") {
+                        kriterijum = 2;
+                    }
+
+                    let podaci = [];
+                    let zadovoljavaju = [];
+                    let voznje = [];
+
+                    if (opcija == 1) {
+                        $.ajax({
+                            type: 'GET',
+                            url: '/api/Korisnik',
+                            async: false,
+                            success: function (data) {
+                                podaci = data;
+
+                            }
+                        })
+                    } else if (opcija == 0) {
+                        $.ajax({
+                            type: 'GET',
+                            async: false,
+                            url: '/api/Vozac',
+                            success: function (data) {
+                                podaci = data;
+
+                            }
+                        })
+                    }
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/api/Voznja',
+                        async: false,
+                        success: function (data) {
+                            voznje = data;
+
+                        }
+                    })
+
+
+                    //prodjes kors korisnike i ispises u neku listu svi koji zadovoljavaju
+                    for (var k in podaci) {
+                        if (kriterijum == 0) // samo po imennu
+                        {
+                            if ((podaci[k].ime).toLowerCase().includes(imePolje.toLowerCase()))
+                                zadovoljavaju.push(podaci[k]);
+
+                        } else if (kriterijum == 1)//samo po prezimenu
+                        {
+                            if ((podaci[k].prezime).toLowerCase().includes(przPolje.toLowerCase()))
+                                zadovoljavaju.push(podaci[k]);
+
+
+                        } else if (kriterijum == 2)//po imenu i prezimenu
+                        {
+                            if ((podaci[k].prezime).toLowerCase().includes(przPolje.toLowerCase()) && (podaci[k].ime).toLowerCase().includes(imePolje.toLowerCase()))
+                                zadovoljavaju.push(podaci[k]);
+
+
+                        }
+                    }
+                    let konacno = [];
+                    if (opcija == 0) {//vozaci
+                        if (pretragica)
+                            voznje = fleg;
+                        else
+                            fleg = [];
+                        for (var voznja in voznje) {
+
+                            for (var vozac in zadovoljavaju) {
+                                if (voznje[voznja].idVozac == zadovoljavaju[vozac].Id)
+                                    konacno.push(voznje[voznja]);
+                            }
+
+                        }
+
+                    } else if (opcija == 1) {//korisnici
+                        if (pretragica)
+                            voznje = fleg;
+                        else
+                            fleg = [];
+                        for (var voznja in voznje) {
+                            for (var musterija in zadovoljavaju) {
+                                if (voznje[voznja].idKorisnik == zadovoljavaju[musterija].Id)
+                                    konacno.push(voznje[voznja]);
+                            }
+                        }
+                    }
+
+                    if (konacno.length == 0) {
+                        $("#tabelaPrikaza").html(`<h4 align=\"center\">Nema rezultata pretrage</h4>`);
+
+                    } else {
+                        data = konacno;
+                        let tabelaVoznji = `<h3 margin-left:200px>Rezultati</h3><hr /><table border='1'><tr><th>Id voznje</th><th>Musterija</th><th>Vozac</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                        tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                        tabelaVoznji += "<th>Komentar</th>";
+                        tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
+                        for (var voznja in data) {
+                            fleg = data;
+                            var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
+                            var datum =
+                                currentdate.getUTCFullYear() + "/" +
+                                ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                ("0" + currentdate.getUTCDate()).slice(-2);
+
+                            var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                ("0" + currentdate.getUTCMinutes()).slice(-2);
+
+                            tabelaVoznji += `<tr><td>${data[voznja].Id}</td>`;
+
+                            if (opcija == 1) {
+                                if (data[voznja].idKorisnik != " ") {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Korisnik/' + data[voznja].idKorisnik,
+                                        async: false,
+                                        success: function (data) {
+                                            tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
+                                        }
+                                    })
+                                } else {
+                                    tabelaVoznji += `<td> </td>`;
+                                }
+
+                                if (data[voznja].idVozac != " ") {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Vozac/' + data[voznja].idVozac,
+                                        async: false,
+                                        success: function (data) {
+                                            tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
+                                        }
+                                    })
+                                } else {
+                                    tabelaVoznji += `<td> </td>`;
+                                }
+
+                            } else {
+
+                                if (data[voznja].idKorisnik != " ") {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Korisnik/' + data[voznja].idKorisnik,
+                                        async: false,
+                                        success: function (data) {
+                                            tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
+                                        }
+                                    })
+                                } else {
+                                    tabelaVoznji += `<td> </td>`;
+                                }
+
+                                if (data[voznja].idVozac != " ") {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Vozac/' + data[voznja].idVozac,
+                                        async: false,
+                                        success: function (data) {
+                                            tabelaVoznji += `<td>${data.ime} ${data.prezime}</td>`;
+                                        }
+                                    })
+                                } else {
+                                    tabelaVoznji += `<td> </td>`;
+                                }
+                            }
+
+                            tabelaVoznji += `
+                                                                        <td>${datum} u ${vreme}h</td>
+                                                                        <td>
+
+                                                                        ${data[voznja].Lokacija.adresa.UlicaBroj},
+                                                                       ${data[voznja].Lokacija.adresa.NaseljenoMesto}
+                                                                       </td>`;
+
+
+                            if (data[voznja].Iznos != "0") {
+                                tabelaVoznji += `<td>
+
+                                                                        ${data[voznja].Odrediste.adresa.UlicaBroj},
+                                                                       ${data[voznja].Odrediste.adresa.NaseljenoMesto}
+                                                                            </td>
+                                                                            <td>${data[voznja].Iznos}</td>`;
+                            } else {
+                                tabelaVoznji += `<td></td>
+                                                                            <td></td>`;
+                            }
+
+                            if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5") {
+                                tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+
+                            } else {
+                                tabelaVoznji += `<td> </td>`;
+
+                            }
+                            tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                                        <td>${getEnumStatus(data[voznja].StatusVoznje)}</td></tr>
+                                                                        `;
+
+                        }
+                        tabelaVoznji += "</table>";
+                        $("#tabelaPrikaza").html(tabelaVoznji);
+
+
+
+                    }
+                }
+            }
+            $("#imePolje").val('');
+            $("#przPolje").val('');
+            //ovde lokal storidz
+            pretragica = true;
+        });
+
+
         });
 
     </script>
@@ -3519,7 +3815,7 @@
 
 </head >
 <body>
-
+    
 <nav class="navbar navbar-default" id="naki">
     <div class="container">
         <div class="navbar-header">
@@ -3549,7 +3845,6 @@
                 <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
                 <li><button class="navbar-toggle, dropbtn" id="fitriranjeVoznji"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                 <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
-                <li><button class="navbar-toggle, dropbtn" id="blokiranje"><i class="fa fa-ban" style="font-size:20px"></i></button></li>
                 <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
             </ul>
         </div>
@@ -3568,9 +3863,6 @@
 <div id="pocetna1" class="container-fluid bg-1 text-center">
     <h2 class="margin" style="color:white;font-weight:bold;">DOBRO DOŠLI!</h2><hr />
  
-    <h3 id="lala" style="font-size:24px">Brojevi</h3>
-    <h3 id="lala1" style="color:#ef5077;font-weight:bold">064 309 3116 &emsp;  <a href="#" id="broj"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
-    <h3 id="lala2" style="color:#ef5077;font-weight:bold">035 8470 027 &emsp; <a href="#" id="brojHome"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
 </div>
 <!-- Second Container -->
 
@@ -3654,6 +3946,9 @@
     <div id="tabelaIzmeniAuto"></div>
 </div>
 
+    <div id="usao" class="alert alert-success">
+        <strong>Uspesno!</strong>
+    </div>
 
 <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
 </div>
@@ -3675,7 +3970,7 @@
         function myMap() {
             var mapCanvas = document.getElementById("map");
             var myCenter = new google.maps.LatLng(45.242630873254775, 19.842914435055945);
-            var mapOptions = { center: myCenter, zoom: 18 };
+            var mapOptions = { center: myCenter, zoom: 13};
             var map = new google.maps.Map(mapCanvas, mapOptions);
             google.maps.event.addListener(map, 'click', function (event) {
                 placeMarker(map, event.latLng);

@@ -12,9 +12,7 @@
     <script src="../../Scripts/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>CIGIN TAXI</title>
-
-
+    <title>TAXI</title>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -80,23 +78,20 @@
 
             $("#registracija").click(function () {
 
-                let ki = $('#korimeReg').val();
-                let p = $('#korPassReg').val();
-                let i = $('#ime').val();
-                let pr = $('#prezime').val();
-                let j = $('#jmbg').val();
-                let e = $('#emailAdr').val();
-                let t = $('#brTelefona').val();
-
-                if (ki == "" || p == "" || i == "" || pr == "" || j == "" || e == "" || t == "")
-                {
-                    alert("Popunite sva polja");
-                }
-                else
+                let x = document.getElementById("korImeReg");
+                let y = document.getElementById("korPassReg");
+                let ub = document.getElementById("ime");
+                let m = document.getElementById("prezime");
+                let p = document.getElementById("jmbg");
+                let p1 = document.getElementById("brTelefona");
+                let p2 = document.getElementById("emailAdr");
+                if (!x.checkValidity() || !y.checkValidity() || !ub.checkValidity() || !m.checkValidity() || !p.checkValidity() || !p1.checkValidity() || !p2.checkValidity()) {
+                    alert("Morate ispravno popuniti sva polja!");
+                } else 
                     {
 
                         let korisnik = {
-                            Kime: `${$('#korimeReg').val()}`,
+                            Kime: `${$('#korImeReg').val()}`,
                             lozinka: `${$('#korPassReg').val()}`,
                             ime: `${$('#ime').val()}`,
                             prezime: `${$('#prezime').val()}`,
@@ -119,9 +114,10 @@
                                     alert("Korisnicko ime je zauzeto");
                                 }
                                 else {
+                                    alert("Registrovan")
                                     $("#greska").text("");
-                                    $("#prikazi").show();
-                                    $("#registracijaDeo").hide(1000);
+                                    $("#registracijaFrame").hide(1000);
+                                    $("#prijavaFrame").show(1000);
                                 }
 
                             }
@@ -130,6 +126,10 @@
 
             });
 
+            $("#skloniSe").click(function () {
+                $("#registracijaFrame").hide(1000);
+                $("#prijavaFrame").show(1000);
+            });
 
          
 
@@ -142,15 +142,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header"></div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right"></ul>
-            </div>
-            <h3>CIGIN TAXI</h3>
-        </div>
-    </nav>
+ 
 
     <div id="prijavaFrame" style="width:800px; margin:0 auto;">
         <h2>PRIJAVA</h2>
@@ -174,35 +166,35 @@
     <div id="greskaPrijava"></div>
     <div id="registracijaFrame" style="width:800px; margin:0 auto;">
         <h2> Registracija </h2>
-        <table>
+        <table style="color:white";>
             <tr>
                 <td>Korisnicko ime: </td>
                 <td>
-                    <input id="korimeReg" type="text" name="Kime" />
+                    <input id="korImeReg" type="text"  name="Kime" required />
                 </td>
 
             </tr>
             <tr>
-                <td>lozinka: </td>
-                <td><input id="korPassReg" type="password" name="lozinka" /></td>
+                <td>Lozinka: </td>
+                <td><input id="korPassReg" type="password" name="lozinka"  required /></td>
             </tr>
             <tr>
-                <td>ime: </td>
-                <td><input id="ime" type="text" name="ime" /></td>
+                <td>Ime: </td>
+                <td><input id="ime" type="text" name="ime" required /></td>
             </tr>
             <tr>
-                <td>prezime: </td>
-                <td><input id="prezime" type="text" name="prezime" /></td>
+                <td>Prezime: </td>
+                <td><input id="prezime" type="text" name="prezime" required /></td>
             </tr>
 
             <tr>
                 <td>JMBG: </td>
-                <td><input id="jmbg" type="text" name="JMBG" /></td>
+                <td><input id="jmbg" type="text" name="JMBG" title="13 cifara" required /></td>
             </tr>
             <tr>
                 <td>Pol: </td>
                 <td>
-                    <select name="Pol" id="pol">
+                    <select name="pol" id="pol">
                         <option>
                             Zenski
                         </option>
@@ -214,15 +206,15 @@
             </tr>
             <tr>
                 <td>Broj telefona: </td>
-                <td><input id="brTelefona" type="text" name="telefon" /></td>
+                <td><input id="brTelefona"  type="text" name="telefon" required /></td>
             </tr>
             <tr>
-                <td>email adresa:</td>
-                <td><input id="emailAdr" type="email" name="email" /></td>
+                <td>Email adresa:</td>
+                <td><input id="emailAdr" type="email" name="email"  required /></td>
             </tr>
             <tr><td><br /></td></tr>
             <tr>
-                <td></td>
+                <td align="center"> <button id="skloniSe" type="button">Odustani</button></td>
                 <td align="right"> <button id="registracija" type="button">Registruj se</button></td>
             </tr>
         </table>
