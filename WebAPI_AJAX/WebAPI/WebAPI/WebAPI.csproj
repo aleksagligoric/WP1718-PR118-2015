@@ -128,7 +128,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Prijava\" />
     <Folder Include="Views\Registration\" />
@@ -200,6 +199,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\pom.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Baza\dispeceri.txt" />
     <Content Include="Baza\komentari.txt" />
