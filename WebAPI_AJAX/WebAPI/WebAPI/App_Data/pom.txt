@@ -1,0 +1,25 @@
+﻿
+/*    let myVar = setInterval(
+                        function proveriStanje() {
+                            if (uloga == 0) {//korisnik
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/api/Korisnik/' + korisnikovAJDI,
+                                    async: false,
+                                    success: function (data) {
+                                       // if (data.Ban == 1)
+                                            $(location).attr('href', 'index.html');
+                                    }
+                                })
+                            } else if (uloga == 2) {//vozac
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/api/Vozac/' + korisnikovAJDI,
+                                    async: false,
+                                    success: function (data) {
+                                       // if (data.Ban == 1)
+                                            $(location).attr('href', 'index.html');
+                                    }
+                                })
+                            }
+                        }, 1000);*/

@@ -1,2 +1,1 @@
-﻿0;krco;k;Aleksa;glig;12312;0677977;Zenski;sdfasdf;45.2431156015278;19.8424262730152;Bulevar oslobođenja 129; Novi Sad 21000;;100;1923;2341234;putnicki;0
-2;vd;v;Vozac;V;fasdf;123;Zenski;adsf;45.2580595694403;19.8185385195286;Hadži Ruvimova 8; Novi Sad;;102;1987;2134214;putnicki;0
+0;krco;k;krco12;k;asdf;1;Zenski;afasdfa@gmail.com;45.2538429990392;19.8197401517866;Drinska 14; Novi Sad;;100;2011;123213;putnicki;0

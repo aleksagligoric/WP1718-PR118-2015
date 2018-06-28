@@ -27,7 +27,6 @@ namespace WebAPI.Models
                 Vozac p = new Vozac(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8],
                     double.Parse(tokens[9]),double.Parse(tokens[10]),tokens[11], tokens[12], tokens[13], tokens[14], int.Parse(tokens[15]), 
                     tokens[16], tokens[17],int.Parse(tokens[18]));
-                list.Add(p.Kime, p);
                 p.Id = list.Count.ToString();
                 list.Add(p.Id, p);
             }

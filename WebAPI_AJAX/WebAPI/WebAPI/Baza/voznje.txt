@@ -1,4 +1,5 @@
-0;06/26/2018 01:40;45.2439136948659;19.8420680525758;Bulevar cara Lazara 19; Novi Sad 21000;;putnicki;0;0;0; ; ; ;0;1;0; ; ; ; ; ;Uspesna
-1;06/26/2018 02:10;45.2427781807142;19.8424316374333;Bulevar oslobođenja 131; Novi Sad 21000;;putnicki;0;0;0; ; ; ; ; ;0;fdsaf;6/26/2018 4:15:11 PM;Aleksa;1;2;Otkazana
-2;06/26/2018 15:53;0;0;undefined;undefined;;putnicki;0;0;0; ; ; ; ;1;0; ; ; ; ; ;Neuspesna
-3;06/26/2018 18:50;45.2430312464835;19.842200967458;Bulevar oslobođenja 129; Novi Sad 21000;;putnicki;0;0;0; ; ; ; ;1;0;asd;6/26/2018 8:54:46 PM;Aleksa;3;1;Uspesna
+0;06/27/2018 15:55;0;0;undefined;undefined;;putnicki;0;45.2538429990392;19.8197401517866;Drinska 14; Novi Sad;; ;0;234; ; ; ; ; ;Uspesna
+1;06/27/2018 15:57;0;0;undefined;undefined;;putnicki;0;0;0; ; ; ; ; ;0;dsad;6/27/2018 6:33:45 PM;Aleksa;1;0;Otkazana
+2;06/27/2018 15:58;45.2568441079486;19.8315847867964;Branimira Ćosića 10; Novi Sad 21000;;svejedno;0;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+3;06/27/2018 18:34;45.2632611818493;19.8341597074507;Berislava Berića 5; Novi Sad;;svejedno;0;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+4;06/27/2018 18:40;45.2425395325527;19.8348463529585;Bulevar cara Lazara 58; Novi Sad 21000;;svejedno;0;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
